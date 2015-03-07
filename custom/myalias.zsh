@@ -1,0 +1,26 @@
+alias c='clear'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+alias df='df -h'
+alias du='du -c -h'
+alias fbterm_zh='LANG=zh_CN.UTF-8 fbterm'
+alias more='less'
+alias openports='netstat --all --numeric --programs --inet --inet6'
+
+# simplified systemd command
+if systemd-notify --booted; then
+    alias 0.start='sudo systemctl start'
+    alias 0.restart='sudo systemctl restart'
+    alias 0.stop='sudo systemctl stop'
+    alias 0.enable='sudo systemctl enable'
+    alias 0.disable='sudo systemctl disable'
+    alias 0.reload='sudo systemctl reload'
+    alias 0.log='sudo journalctl'
+    alias 0.status='systemctl status'
+    alias 0.list='systemctl'
+    alias 0.list-files='systemctl list-unit-files'
+    alias 0.wants='systemctl show -p "Wants"'
+    alias 0.analyze='systemd-analyze'
+    alias 0.failed='systemctl --failed'
+fi
