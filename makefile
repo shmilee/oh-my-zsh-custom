@@ -1,30 +1,30 @@
 ZSH_CUSTOM := $(HOME)/.oh-my-zsh/custom
 # INSTALL place
 
-archplugin = archlinux command-not-found git history-substring-search
-admin = sudo systemadmin systemd
-#ifts: ifts-kylin ifts-me ifts-zion
-
 LOCATION := default
-plugins := cp extract screen
+plugins := cp extract screen history-substring-search
 ZSH := $(HOME)/.oh-my-zsh
 
 HOST := $(shell hostname)
+kylinplugin = ifts-kylin
+zionplugin = git ifts-zion
+archplugin = archlinux command-not-found git ifts-me
+admin = sudo systemadmin systemd
 
 ifeq ($(HOST),manager-ib)
 	LOCATION := kylin
-	plugins += ifts-kylin
+	plugins += $(kylinplugin)
 endif
 
 ifeq ($(HOST),ZION)
 	LOCATION := zion
-	plugins += ifts-zion
+	plugins += $(zionplugin)
 endif
 
 # my computer & archlinux
 ifeq ($(USER),shmilee)
 	LOCATION := arch
-	plugins += $(archplugin) $(admin) ifts-me
+	plugins += $(admin) $(archplugin)
 	ZSH := /usr/share/oh-my-zsh
 endif
 
