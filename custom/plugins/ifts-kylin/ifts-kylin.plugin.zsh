@@ -18,6 +18,3 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/public/home/users/tgzhang/lib/NTCC/lib
 export PETSC_DIR=/public/home/users/tgzhang/lib/petsc-3.4.4
 export PETSC_ARCH=linux-gnu-intel
 
-# myapp: git ipython
-export LD_LIBRARY_PATH=~/myapp/usr/lib:${LD_LIBRARY_PATH}
-export PATH=~/myapp/usr/bin:$PATH

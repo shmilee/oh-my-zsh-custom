@@ -9,7 +9,7 @@ alias more='less'
 alias openports='netstat --all --numeric --programs --inet --inet6'
 
 # simplified systemd command
-if systemd-notify --booted; then
+if systemd-notify --booted 2>/dev/null; then
     alias 0.start='sudo systemctl start'
     alias 0.restart='sudo systemctl restart'
     alias 0.stop='sudo systemctl stop'
