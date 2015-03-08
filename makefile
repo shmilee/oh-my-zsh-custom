@@ -8,23 +8,17 @@ admin = sudo systemadmin systemd
 LOCATION := default
 plugins := cp extract screen
 ZSH := $(HOME)/.oh-my-zsh
-ADD_PATH :=
-ADD_LD :=
 
 HOST := $(shell hostname)
 
 ifeq ($(HOST),manager-ib)
 	LOCATION := kylin
 	plugins += ifts-kylin
-	ADD_PATH := ~/myapp/bin:
-	ADD_LD := ~/myapp/lib:
 endif
 
 ifeq ($(HOST),ZION)
 	LOCATION := zion
 	plugins += ifts-zion
-	ADD_PATH := ~/myapp/bin:
-	ADD_LD := ~/myapp/lib:
 endif
 
 # my computer & archlinux
@@ -42,8 +36,7 @@ $(LOCATION):
 	@echo 'Plugins    : $(plugins)'
 	@echo
 	sed -e 's|##ZSH##|$(ZSH)|' -e 's|##ZSH_CUSTOM##|$(ZSH_CUSTOM)|' \
-		-e 's|##PLUGINS##|$(plugins)|' -e 's|##ADD_PATH##|$(ADD_PATH)|'\
-		-e 's|##ADD_LD##|$(ADD_LD)|' myzshrc > zshrc.$(LOCATION)
+		-e 's|##PLUGINS##|$(plugins)|' myzshrc > zshrc.$(LOCATION)
 
 install:
 	cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \

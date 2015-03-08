@@ -49,10 +49,6 @@ plugins=(##PLUGINS##)
 
 # User configuration
 
-export PATH=##ADD_PATH##$PATH
-export LD_LIBRARY_PATH=##ADD_LD##${LD_LIBRARY_PATH}
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
