@@ -4,9 +4,11 @@ ZSH_CUSTOM := $(HOME)/.oh-my-zsh/custom
 LOCATION := default
 plugins := cp extract screen history-substring-search
 ZSH := $(HOME)/.oh-my-zsh
+FIX_FPATH := no
+MYAPP := $(HOME)/myapp
 
 HOST := $(shell hostname)
-kylinplugin = ifts-kylin
+kylinplugin = git ifts-kylin
 zionplugin = git ifts-zion
 archplugin = archlinux command-not-found git ifts-me
 admin = sudo systemadmin systemd
@@ -14,11 +16,15 @@ admin = sudo systemadmin systemd
 ifeq ($(HOST),manager-ib)
 	LOCATION := kylin
 	plugins += $(kylinplugin)
+	ZSH := $(MYAPP)/share/oh-my-zsh
+	FIX_FPATH := yes
+	FPATH := $(shell find $(MYAPP)/share/zsh/functions/* -type d)
 endif
 
 ifeq ($(HOST),ZION)
 	LOCATION := zion
 	plugins += $(zionplugin)
+	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 
 # my computer & archlinux
@@ -37,6 +43,9 @@ $(LOCATION):
 	@echo
 	sed -e 's|##ZSH##|$(ZSH)|' -e 's|##ZSH_CUSTOM##|$(ZSH_CUSTOM)|' \
 		-e 's|##PLUGINS##|$(plugins)|' myzshrc > zshrc.$(LOCATION)
+	if [[ $(FIX_FPATH) == yes ]]; then \
+		sed -i -e 's|^##FIX_FPATH##|fpath=($(FPATH) $$fpath)|' zshrc.$(LOCATION); \
+	fi
 
 install:
 	cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \

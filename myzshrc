@@ -48,7 +48,7 @@ ZSH_CUSTOM=##ZSH_CUSTOM##
 plugins=(##PLUGINS##)
 
 # User configuration
-
+##FIX_FPATH##
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
