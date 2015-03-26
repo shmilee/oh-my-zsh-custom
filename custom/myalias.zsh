@@ -7,6 +7,7 @@ alias du='du -c -h'
 alias fbterm_zh='LANG=zh_CN.UTF-8 fbterm'
 alias more='less'
 alias openports='netstat --all --numeric --programs --inet --inet6'
+alias matlabcli='~/.local/matlab2010a/bin/matlab -nodesktop -nosplash'
 
 # simplified systemd command
 if systemd-notify --booted 2>/dev/null; then
