@@ -24,7 +24,8 @@ qstatc() {
         fi
         qstat | sed -e "/${name}[ \t]*[rR]/ s/^.*$/$fg_bold[green]${Ent}&${Ent}$reset_color/" \
             -e "/${name}[ \t]*[Ee]/ s/^.*$/$fg_bold[red]${Ent}&${Ent}$reset_color/" \
-            -e "/${name}[ \t]*[qQ]/ s/^.*$/$fg_bold[yellow]${Ent}&${Ent}$reset_color/"
+            -e "/${name}[ \t]*[qQ]/ s/^.*$/$fg_bold[yellow]${Ent}&${Ent}$reset_color/" \
+            -e "/${name}[ \t]*[dD]/ s/^.*$/$fg_bold[grey]${Ent}&${Ent}$reset_color/"
     else
         qstat
     fi
