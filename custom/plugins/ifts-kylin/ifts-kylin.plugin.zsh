@@ -16,12 +16,9 @@ export PETSC_DIR=$HOME/myapp/petsc-3.5.3/linux-openmpi-intel
 
 qstatc() {
     local name Ent
-    name=$1
-    Ent=$2
+    name=${1:-$USER}
+    Ent=${2:+'\n'}
     if [[ x$name != x ]];then
-        if [[ x$Ent != x ]]; then
-            Ent='\n'
-        fi
         qstat | sed -e "/${name}[ \t]*[rR]/ s/^.*$/$fg_bold[green]${Ent}&${Ent}$reset_color/" \
             -e "/${name}[ \t]*[Ee]/ s/^.*$/$fg_bold[red]${Ent}&${Ent}$reset_color/" \
             -e "/${name}[ \t]*[qQ]/ s/^.*$/$fg_bold[yellow]${Ent}&${Ent}$reset_color/" \
