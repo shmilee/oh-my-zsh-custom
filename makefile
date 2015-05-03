@@ -10,6 +10,7 @@ MYAPP := $(HOME)/myapp
 HOST := $(shell hostname)
 kylinplugin = git ifts-kylin
 zionplugin = git ifts-zion
+th1aplugin = git th-1a
 archplugin = archlinux command-not-found git ifts-me
 admin = sudo systemadmin systemd
 
@@ -24,6 +25,12 @@ endif
 ifeq ($(HOST),ZION)
 	LOCATION := zion
 	plugins += $(zionplugin)
+	ZSH := $(MYAPP)/share/oh-my-zsh
+endif
+
+ifeq ($(HOST),ln3)
+	LOCATION := th1a
+	plugins += $(th1aplugin)
 	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 
