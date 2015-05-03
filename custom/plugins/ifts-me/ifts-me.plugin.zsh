@@ -11,3 +11,6 @@ scp4zion () { scp -P 5789 -r smli@10.22.92.171:$1 ./; }
 
 scp2oldifts () { scp -P 10321 -r $1 smli@10.22.92.172:upload/; }
 scp4oldifts () { scp -P 10321 -r smli@10.22.92.172:$1 ./; }
+
+scp2th1a () { scp -P 2223 -r $1 zhaochen@192.168.5.126:upload/; }
+scp4th1a () { scp -P 2223 -r zhaochen@192.168.5.126:$1 ./; }
