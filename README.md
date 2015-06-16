@@ -4,6 +4,7 @@ Plugins
 * ifts-kylin
 * ifts-me
 * ifts-zion
+* th-1a
 
 Theme
 ========
