@@ -25,3 +25,8 @@ if systemd-notify --booted 2>/dev/null; then
     alias 0.analyze='systemd-analyze'
     alias 0.failed='systemctl --failed'
 fi
+
+nikola() {
+    nkl_Ver=${1:-7.5.0}
+    docker run -u 1000 -t --rm -p 8000:8000 -v $(pwd):/blog -w /blog -i nikola:$nkl_Ver bash
+}
