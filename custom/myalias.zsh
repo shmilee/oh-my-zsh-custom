@@ -27,6 +27,13 @@ if systemd-notify --booted 2>/dev/null; then
 fi
 
 nikola() {
-    nkl_Ver=${1:-7.5.0}
+    nkl_Ver=${1:-using}
+    if [[ x$nkl_Ver == 'x-h' ]]; then
+        echo "$0 <docker nikola tag>"
+        echo "Default is <using>"
+        docker images
+        return 0
+    fi
     docker run -u 1000 -t --rm -p 8000:8000 -v $(pwd):/blog -w /blog -i nikola:$nkl_Ver bash
 }
+
