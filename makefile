@@ -35,10 +35,15 @@ ifeq ($(HOST),ln3)
 endif
 
 # my computer & archlinux
-ifeq ($(USER),shmilee)
+ifneq (,$(findstring arch-,$(HOST)))
 	LOCATION := arch
 	plugins += $(admin) $(archplugin)
 	ZSH := /usr/share/oh-my-zsh
+endif
+
+ifneq (,$(findstring osx-,$(HOST)))
+	LOCATION := MacOSX
+	plugins += sudo git ifts-me
 endif
 
 $(LOCATION):
@@ -48,23 +53,26 @@ $(LOCATION):
 	@echo 'ZSH_CUSTOM : $(ZSH_CUSTOM)'
 	@echo 'Plugins    : $(plugins)'
 	@echo
-	sed -e 's|##ZSH##|$(ZSH)|' -e 's|##ZSH_CUSTOM##|$(ZSH_CUSTOM)|' \
+	@sed -e 's|##ZSH##|$(ZSH)|' -e 's|##ZSH_CUSTOM##|$(ZSH_CUSTOM)|' \
 		-e 's|##PLUGINS##|$(plugins)|' myzshrc > zshrc.$(LOCATION)
-	if [[ $(FIX_FPATH) == yes ]]; then \
+	@if [[ $(FIX_FPATH) == yes ]]; then \
 		sed -i -e 's|^##FIX_FPATH##|fpath=($(FPATH) $$fpath)|' zshrc.$(LOCATION); \
 	fi
 
-install:
-	cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \
-		-exec install -Dvm644 {} $(ZSH_CUSTOM)/{} \;
-	if [ -a $(HOME)/.zshrc ]; then \
-		mv $(HOME)/.zshrc $(HOME)/.zshrc.bk; \
+install: pre
+	@cd custom/; find . -type d -exec install -dvm755 {} $(ZSH_CUSTOM)/{} \;
+	@cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \
+		-exec install -vm644 {} $(ZSH_CUSTOM)/{} \;
+	@if [ -a $(HOME)/.zshrc ]; then \
+		mv -v $(HOME)/.zshrc $(HOME)/.zshrc.bk; \
 	fi
 	install -m644 zshrc.$(LOCATION) $(HOME)/.zshrc
 
 pre:
-	if [ ! -d $(ZSH) ]; then \
+	@if [ ! -d $(ZSH) ]; then \
 		git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $(ZSH); \
+	else \
+		echo 'ZSH        : $(ZSH)'; \
 	fi
 	@echo 'default shell is $(shell echo $$SHELL)'
 
