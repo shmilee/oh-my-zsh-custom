@@ -1,13 +1,22 @@
 alias c='clear'
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
 alias df='df -h'
 alias du='du -c -h'
-alias fbterm_zh='LANG=zh_CN.UTF-8 fbterm'
 alias more='less'
-alias openports='netstat --all --numeric --programs --inet --inet6'
-alias matlabcli='unset _JAVA_OPTIONS; ~/.local/matlab2010a/bin/matlab -nodesktop -nosplash'
+
+if [[ $(uname) != Darwin ]]; then
+    alias chown='chown --preserve-root'
+    alias chmod='chmod --preserve-root'
+    alias chgrp='chgrp --preserve-root'
+    alias openports='netstat --all --numeric --programs --inet --inet6'
+fi
+
+if [ -f /usr/bin/fbterm ]; then
+    alias fbterm_zh='LANG=zh_CN.UTF-8 fbterm'
+fi
+
+if [ -f ~/.local/matlab2010a/bin/matlab ]; then
+    alias matlabcli='unset _JAVA_OPTIONS; ~/.local/matlab2010a/bin/matlab -nodesktop -nosplash'
+fi
 
 # simplified systemd command
 if systemd-notify --booted 2>/dev/null; then

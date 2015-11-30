@@ -7,6 +7,7 @@ ZSH := $(HOME)/.oh-my-zsh
 FIX_FPATH := no
 MYAPP := $(HOME)/myapp
 
+OS   := $(shell uname)
 HOST := $(shell hostname)
 kylinplugin = git ifts-kylin
 zionplugin = git ifts-zion
@@ -41,9 +42,9 @@ ifneq (,$(findstring arch-,$(HOST)))
 	ZSH := /usr/share/oh-my-zsh
 endif
 
-ifneq (,$(findstring osx-,$(HOST)))
+ifeq ($(OS),Darwin)
 	LOCATION := MacOSX
-	plugins += sudo git ifts-me
+	plugins += sudo git ifts-me brew
 endif
 
 $(LOCATION):
