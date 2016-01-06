@@ -44,7 +44,7 @@ endif
 
 ifeq ($(OS),Darwin)
 	LOCATION := MacOSX
-	plugins += sudo git ifts-me brew
+	plugins += sudo git ifts-me brew brew-cask
 endif
 
 $(LOCATION):
