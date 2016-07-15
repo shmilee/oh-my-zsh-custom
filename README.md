@@ -11,7 +11,7 @@ Theme
 
 * shmilee
 
-![snapshot](https://raw.githubusercontent.com/shmilee/oh-my-zsh-custom/master/theme-snapshot.jpg)
+![snapshot](theme-snapshot.jpg)
 
 Override
 ========
