@@ -14,8 +14,12 @@ if [ -f /usr/bin/fbterm ]; then
     alias fbterm_zh='LANG=zh_CN.UTF-8 fbterm'
 fi
 
-if [ -f ~/.local/matlab2010a/bin/matlab ]; then
-    alias matlabcli='unset _JAVA_OPTIONS; ~/.local/matlab2010a/bin/matlab -nodesktop -nosplash'
+if [ -f ~/.local/matlab/bin/matlab ]; then
+    if hash optirun &>/dev/null; then
+        alias matlabcli='unset _JAVA_OPTIONS; optirun ~/.local/matlab/bin/matlab -nodesktop -nosplash'
+    else
+        alias matlabcli='unset _JAVA_OPTIONS; ~/.local/matlab/bin/matlab -nodesktop -nosplash'
+    fi
 fi
 
 # simplified systemd command
