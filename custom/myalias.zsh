@@ -4,6 +4,8 @@ alias du='du -c -h'
 alias more='less'
 
 if [[ $(uname) != Darwin ]]; then
+    alias open='xdg-open'
+    alias o='xdg-open'
     alias chown='chown --preserve-root'
     alias chmod='chmod --preserve-root'
     alias chgrp='chgrp --preserve-root'
