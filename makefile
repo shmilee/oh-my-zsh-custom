@@ -2,49 +2,49 @@ ZSH_CUSTOM := $(HOME)/.oh-my-zsh/custom
 # INSTALL place
 
 LOCATION := default
-plugins := cp extract screen history-substring-search
+plugins := cp extract screen history-substring-search git
 ZSH := $(HOME)/.oh-my-zsh
 FIX_FPATH := no
 MYAPP := $(HOME)/myapp
 
 OS   := $(shell uname)
 HOST := $(shell hostname)
-kylinplugin = git ifts-kylin
-zionplugin = git ifts-zion
-th1aplugin = git th-1a
-archplugin = archlinux command-not-found git ifts-me
-admin = sudo systemadmin systemd
 
 ifeq ($(HOST),manager-ib)
 	LOCATION := kylin
-	plugins += $(kylinplugin)
+	plugins += ifts-kylin
 	ZSH := $(MYAPP)/share/oh-my-zsh
 	FIX_FPATH := yes
 	FPATH := $(shell find $(MYAPP)/share/zsh/functions/* -type d)
 endif
 
+ifeq ($(HOST),ln1)
+	LOCATION := kylin2
+	plugins += ifts-kylin2
+endif
+
 ifeq ($(HOST),ZION)
 	LOCATION := zion
-	plugins += $(zionplugin)
+	plugins += ifts-zion
 	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 
 ifeq ($(HOST),ln3)
 	LOCATION := th1a
-	plugins += $(th1aplugin)
+	plugins += th-1a
 	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 
 # my computer & archlinux
 ifneq (,$(findstring arch-,$(HOST)))
 	LOCATION := arch
-	plugins += $(admin) $(archplugin)
+	plugins += sudo archlinux command-not-found systemadmin systemd systemd-more
 	ZSH := /usr/share/oh-my-zsh
 endif
 
 ifeq ($(OS),Darwin)
 	LOCATION := MacOSX
-	plugins += sudo git ifts-me brew brew-cask
+	plugins += sudo brew brew-cask
 endif
 
 $(LOCATION):

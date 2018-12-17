@@ -2,8 +2,9 @@ Plugins
 ========
 
 * ifts-kylin
-* ifts-me
+* ifts-kylin2
 * ifts-zion
+* systemd-more
 * th-1a
 
 Theme
