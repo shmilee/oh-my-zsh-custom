@@ -1,10 +1,5 @@
 source /public/intel/compilers_and_libraries_2018.1.148/linux/pkg_bin/ifortvars.sh intel64
 
-# PETSC TODO
-export PETSC_DIR=/public/home/test3/hwyang/myapp-intel2018.1.148/petsc-3.6.4
-export PETSC_ARCH=linux-gnu-c-debug
-export PETSC_KSP_LIB=/public/home/test3/hwyang/myapp-intel2018.1.148/petsc-3.6.4/linux-gnu-c-debug/include:$PETSC_KSP_LIB
-
 # User specific aliases and functions
 alias yhrun='srun'
 alias yhbatch='sbatch'
