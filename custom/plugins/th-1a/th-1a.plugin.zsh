@@ -12,3 +12,17 @@ for _sw in $_mpi ${_other_software[@]}; do
     export INCLUDE=$_sw/include:$INCLUDE
 done
 unset _mpi _sw _other_software
+
+# User specific aliases and functions
+alias yhq='squeue'
+alias yhqc='yhq|sqc'
+alias yhi='sinfo'
+
+sqc() {
+    local user=${1:-$USER}
+    cat - | sed \
+        -e "/${user}[ \t]*R[ \t]*/ s/^.*$/$fg_bold[green]&$reset_color/" \
+        -e "/${user}[ \t]*F[ \t]*/ s/^.*$/$fg_bold[red]&$reset_color/" \
+        -e "/${user}[ \t]*PD[ \t]*/ s/^.*$/$fg_bold[yellow]&$reset_color/" \
+        -e "/${user}[ \t]*C[AG][ \t]*/ s/^.*$/$fg_bold[grey]&$reset_color/"
+}
