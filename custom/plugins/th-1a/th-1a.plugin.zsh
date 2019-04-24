@@ -1,16 +1,14 @@
-export LD_LIBRARY_PATH=/vol-th/lib-11.1:$LD_LIBRARY_PATH
-source /opt/intel/Compiler/11.1/059/bin/intel64/iccvars_intel64.sh
-source /opt/intel/Compiler/11.1/059/bin/intel64/ifortvars_intel64.sh
+source /opt/intel/composer_xe_2013.0.079/bin/iccvars.sh intel64
+source /opt/intel/composer_xe_2013.0.079/bin/ifortvars.sh intel64
+source /opt/intel/composer_xe_2013.0.079/mkl/bin/mklvars.sh intel64
 
-#_mpi=/vol-th/software/mpi/mpi_1.2.1_intel_11.1
-_mpi=/vol-th/software/mpi/mpi_1.4.1_intel_11.1
-#_mpi=/vol-th/software/mpi/mpi_1.4.1_intel_11.1_large
-_other_software=(/vol-th/software/{expat210,xz,python2.7,hdf5})
-
+export LD_LIBRARY_PATH=/vol6/intel_composer_xe_2013.0.079_lib:$LD_LIBRARY_PATH
+_mpi=/vol6/software/mpi/mpi-intel2013
+_other_software=(/vol6/software/{expat210,xz,python-2.7.11,hdf5})
 for _sw in $_mpi ${_other_software[@]}; do
     export PATH=$_sw/bin:$PATH
     export LD_LIBRARY_PATH=$_sw/lib:$LD_LIBRARY_PATH
     export MANPATH=$_sw/share/man:$MANPATH
     export INCLUDE=$_sw/include:$INCLUDE
 done
-unset _sw _other_software
+unset _mpi _sw _other_software
