@@ -37,3 +37,17 @@ sqc() {
         -e "/${user}[ \t]*PD[ \t]*/ s/^.*$/$fg_bold[yellow]&$reset_color/" \
         -e "/${user}[ \t]*C[AG][ \t]*/ s/^.*$/$fg_bold[grey]&$reset_color/"
 }
+
+yhused() {
+    local st args cal
+    if [ x"$1" = x ]; then
+        st=''
+    else
+        st="start=$1"
+    fi
+    args=(cluster AccountUtilizationByUser $st user=$USER -t hours)
+    sreport ${args[@]}
+    cal=$(sreport ${args[@]} | awk '/zju-ifts/{print $4}')
+    echo ""
+    echo " ==> $cal (core*hour)"
+}
