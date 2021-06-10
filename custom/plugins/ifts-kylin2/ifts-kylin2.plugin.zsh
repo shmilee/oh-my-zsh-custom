@@ -21,7 +21,7 @@ sqc() {
 yhused() {
     local st args cal
     if [ x"$1" = x ]; then
-        st=''
+        st="start=$(date +%Y-%m-01)"
     else
         st="start=$1"
     fi
@@ -36,7 +36,7 @@ yhused() {
 yhused2() {
     local st args cal
     if [ x"$1" = x ]; then
-        st=''
+        st="-S $(date +%Y-%m-01)"
     else
         st="-S $1"
     fi
