@@ -9,7 +9,19 @@ MYAPP := $(HOME)/myapp
 
 OS   := $(shell uname)
 HOST := $(shell hostname)
+HOSTID := $(shell hostid)
 
+ifneq (,$(sort $(foreach hid, 68794c32 68794e32 68794d32 0819ce06, \
+      $(findstring ${hid}, $(HOSTID)))))
+	LOCATION := th1a
+	plugins += th-1a
+	ZSH := $(MYAPP)/share/oh-my-zsh
+endif
+
+ifneq (,$(findstring c084590bc, $(shell cat /etc/machine-id 2>/dev/null)))
+	LOCATION := TH-3F
+	plugins += th-3
+endif
 ifeq ($(HOST),manager-ib)
 	LOCATION := kylin
 	plugins += ifts-kylin
@@ -18,7 +30,7 @@ ifeq ($(HOST),manager-ib)
 	FPATH := $(shell find $(MYAPP)/share/zsh/functions/* -type d)
 endif
 
-ifeq ($(HOST),ln1)
+ifneq (,$(findstring 06fdf68b, $(shell cat /etc/machine-id 2>/dev/null)))
 	LOCATION := kylin2
 	plugins += ifts-kylin2
 endif
@@ -26,12 +38,6 @@ endif
 ifeq ($(HOST),ZION)
 	LOCATION := zion
 	plugins += ifts-zion
-	ZSH := $(MYAPP)/share/oh-my-zsh
-endif
-
-ifeq ($(HOST),ln3)
-	LOCATION := th1a
-	plugins += th-1a
 	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 

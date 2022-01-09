@@ -1,28 +1,17 @@
-## test TH-3
-_software=(
-    '/vol7/software/gcc/8.2.0'
-    '/vol7/software/mpich/3.2.1-gcc8.2.0'
-    '/vol7/software/python/3.6.6-gcc8.2.0'
-    '/vol7/software/hdf5/1.8.21-gcc8.2.0-mpich3.2.1'
-)
-for _sw in ${_software[@]}; do
-    if [ -d $_sw/bin ]; then
-        export PATH=$_sw/bin:$PATH
-    fi
-    if [ -d $_sw/lib ]; then
-        export LD_LIBRARY_PATH=$_sw/lib:$LD_LIBRARY_PATH
-    fi
-    if [ -d $_sw/lib64 ]; then
-        export LD_LIBRARY_PATH=$_sw/lib64:$LD_LIBRARY_PATH
-    fi
-    if [ -d $_sw/share/man ]; then
-        export MANPATH=$_sw/share/man:$MANPATH
-    fi
-    if [ -d $_sw/include ]; then
-        export INCLUDE=$_sw/include:$INCLUDE
-    fi
-done
-unset _sw _software
+source /thfs1/software/modules/4.2.1/init/zsh
+
+module load GCC/9.3.0
+module load mpich/mpi-x-gcc9.3.0
+module load python/2.7.18
+module load lapack/3.8.0-gcc9.3.0
+module load libpng/1.6.37-gcc9.3.0
+module load libjpeg-turbo/2.1.0-gcc9.3.0
+
+_GTC_DEPENDS_DIST=~/shmilee/gtc-config/third_party_product
+
+export PATH=$_GTC_DEPENDS_DIST/bin:$PATH
+export INCLUDE=$_GTC_DEPENDS_DIST/include:$INCLUDE
+export LD_LIBRARY_PATH=$_GTC_DEPENDS_DIST/lib:$LD_LIBRARY_PATH
 
 # User specific aliases and functions
 alias yhq='squeue'
