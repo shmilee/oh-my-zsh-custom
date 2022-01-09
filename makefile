@@ -65,7 +65,9 @@ $(LOCATION):
 	@if [[ $(FIX_FPATH) == yes ]]; then \
 		sed -i -e 's|^##FIX_FPATH##|fpath=($(FPATH) $$fpath)|' zshrc.$(LOCATION); \
 	fi
-
+	@if [[ x"$(LOCATION)" == x"TH-3F" ]]; then \
+		sed -i -e 's|^compinit$$|compinit -i|' zshrc.$(LOCATION); \
+	fi
 install: pre
 	@cd custom/; find . -type d -exec install -dvm755 {} $(ZSH_CUSTOM)/{} \;
 	@cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \
