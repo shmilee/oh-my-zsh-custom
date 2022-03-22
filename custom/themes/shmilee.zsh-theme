@@ -11,6 +11,7 @@ local smiley_ret="%(?,%{$fg[green]%}:%) %?%{$reset_color%},%{$fg[red]%}:( %?%{$r
 
 PROMPT=$'${_cnt}┌─${_op}${_u_at_h}:%{\e[1;37m%}%~${_cp}-${_op}%*${_cp} $(git_prompt_info)
 ${_cnt}└─${_op}%{\e[1;37m%}%B%(!.#.$)${_cp} '
+ZLE_RPROMPT_INDENT=0
 RPROMPT='$(git_time_since_commit)$(git_prompt_status) ${smiley_ret}'
 PS2=$'[%_] ${_cnt}>%{\e[0m%}%b '
 
