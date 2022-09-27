@@ -18,3 +18,7 @@ if [ -f ~/.local/matlab/bin/matlab ]; then
 fi
 
 alias scp-append='rsync --progress -v -z --append-verify -e "ssh -o ServerAliveInterval=60"'
+
+if (hash you-get &>/dev/null) && (hash mpv &>/dev/null); then
+    alias you-mpv='you-get -p mpv'
+fi
