@@ -17,8 +17,23 @@ if [ -f ~/.local/matlab/bin/matlab ]; then
     fi
 fi
 
-alias scp-append='rsync --progress -v -z --append-verify -e "ssh -o ServerAliveInterval=60"'
+if (hash rsync &>/dev/null) && (hash ssh &>/dev/null); then
+    alias scp-append='rsync --progress -v -z --append-verify -e "ssh -o ServerAliveInterval=60"'
+fi
 
 if (hash you-get &>/dev/null) && (hash mpv &>/dev/null); then
     alias you-mpv='you-get -p mpv'
+fi
+
+if hash ffprobe &>/dev/null; then
+    alias ffprobe-show-json='ffprobe -v quiet -print_format json -show_format -show_data -show_streams'
+fi
+if hash ffmpeg &>/dev/null; then
+    ffmpeg-copy () {
+        if [ x"$1" = x -o x"$2" = x ];then
+            echo "Usage: ffmpeg-copy INPUT OUTPUT"
+        else
+            ffmpeg -i "$1" -vcodec copy -acodec copy "$2"
+        fi
+    }
 fi
