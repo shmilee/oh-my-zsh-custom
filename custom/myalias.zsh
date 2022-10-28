@@ -37,3 +37,23 @@ if hash ffmpeg &>/dev/null; then
         fi
     }
 fi
+
+if hash find &>/dev/null; then
+    find_newer() {
+        if [ x"$1" = x -o x"$2" = x ];then
+            echo 'Usage: find_newer starting-point [[CC]YY]MMDDhhmm[.ss] Your-find-EXPRESSION (like -type d -exec xxx)'
+            return 1
+        fi
+        start="${1}"
+        tmpfile="$(mktemp -u -t findnewer-XXXXXX)"
+        other=(${@:3})
+        echo touch -t "$2" "$tmpfile" "&&" find $start -newer $tmpfile ${other[@]}
+        read -q "Ent?Enter y to run: "
+        if [ x"$Ent" = xy ]; then
+            touch -t "$2" "$tmpfile" && (
+                find $start -newer $tmpfile ${other[@]}
+                rm "$tmpfile"
+            )
+        fi
+    }
+fi
