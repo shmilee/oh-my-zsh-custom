@@ -49,6 +49,7 @@ if hash find &>/dev/null; then
         other=(${@:3})
         echo touch -t "$2" "$tmpfile" "&&" find $start -newer $tmpfile ${other[@]}
         read -q "Ent?Enter y to run: "
+        echo
         if [ x"$Ent" = xy ]; then
             touch -t "$2" "$tmpfile" && (
                 find $start -newer $tmpfile ${other[@]}
