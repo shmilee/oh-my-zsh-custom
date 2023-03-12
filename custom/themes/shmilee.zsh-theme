@@ -9,7 +9,7 @@ local _cp="${_cnt}]%b%{$reset_color%}"
 local _u_at_h=$'%{\e[1;32m%}%n%{\e[1;34m%}@%{\e[0;36m%}%m'
 local smiley_ret="%(?,%{$fg[green]%}:%) %?%{$reset_color%},%{$fg[red]%}:( %?%{$reset_color%})"
 
-PROMPT=$'${_cnt}┌─${_op}${_u_at_h}:%{\e[1;37m%}%~${_cp}-${_op}%*${_cp} $(git_prompt_info)
+PROMPT=$'${_cnt}┌─${_op}${_u_at_h}: %{\e[1;37m%}%~${_cp}-${_op}%*${_cp} $(git_prompt_info)
 ${_cnt}└─${_op}%{\e[1;37m%}%B%(!.#.$)${_cp} '
 ZLE_RPROMPT_INDENT=0
 RPROMPT='$(git_time_since_commit)$(git_prompt_status) ${smiley_ret}'
