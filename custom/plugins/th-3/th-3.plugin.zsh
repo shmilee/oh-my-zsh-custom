@@ -2,16 +2,11 @@ source /thfs1/software/modules/4.2.1/init/zsh
 
 module load GCC/9.3.0
 module load mpich/mpi-x-gcc9.3.0
-module load python/2.7.18
-module load lapack/3.8.0-gcc9.3.0
+module load python/3.10.6_mamforge_4.14.0-0
 module load libpng/1.6.37-gcc9.3.0
 module load libjpeg-turbo/2.1.0-gcc9.3.0
 
-_GTC_DEPENDS_DIST=~/shmilee/gtc-config/third_party_product
-
-export PATH=$_GTC_DEPENDS_DIST/bin:$PATH
-export INCLUDE=$_GTC_DEPENDS_DIST/include:$INCLUDE
-export LD_LIBRARY_PATH=$_GTC_DEPENDS_DIST/lib:$LD_LIBRARY_PATH
+source ~/shmilee/gtc-config/dist/tianhe-3-gnu-aarch64/gtc-env-source.sh
 
 # User specific aliases and functions
 alias yhq='squeue'
