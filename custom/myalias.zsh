@@ -36,6 +36,19 @@ if hash ffmpeg &>/dev/null; then
             ffmpeg -i "$1" -vcodec copy -acodec copy "$2"
         fi
     }
+    ffmpeg-slim-h264() {
+        if [ x"$1" = x -o x"$2" = x ]; then
+            echo "Usage: ffmpeg-copy INPUT OUTPUT [vcodec] [size]"
+        else
+            # -vcodec encoders: libx264 h264_nvenc h264_qsv h264_vaapi
+            local encoder=${3:-libx264}
+            if [ x"$4" = x ]; then
+                ffmpeg -i "$1" -c:a copy -vcodec $encoder -profile:v high -r 30 -crf 28 "$2"
+            else
+                ffmpeg -i "$1" -c:a copy -vcodec $encoder -profile:v high -r 30 -crf 28 -s $4 "$2"
+            fi
+        fi
+    }
 fi
 
 if hash find &>/dev/null; then
