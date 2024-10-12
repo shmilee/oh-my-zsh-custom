@@ -19,10 +19,15 @@ fi
 
 if (hash rsync &>/dev/null) && (hash ssh &>/dev/null); then
     alias scp-append='rsync --progress -v -z --append-verify -e "ssh -o ServerAliveInterval=60"'
+    alias scp-sync='rsync -aAX -D --progress --numeric-ids --links --hard-links --itemize-changes --times --recursive --perms --owner --group --stats --human-readable -e "ssh -o ServerAliveInterval=60"'
 fi
 
-if (hash you-get &>/dev/null) && (hash mpv &>/dev/null); then
-    alias you-mpv='you-get -p mpv'
+if hash nvim-qt &>/dev/null; then
+    alias qvim='nvim-qt'
+fi
+
+if hash rofi &>/dev/null; then
+    alias crofi='rofi -show combi -modes combi -combi-modes "drun,window,run,emoji"  -dpi 144'
 fi
 
 if hash ffprobe &>/dev/null; then
