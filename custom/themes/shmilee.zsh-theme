@@ -29,7 +29,8 @@ function git_time_since_commit() {
     fi
 
     # Totals
-    seconds_since_last_commit=$(( EPOCHSECONDS - last_commit ))
+    now=${EPOCHSECONDS:-$(date +%s)}
+    seconds_since_last_commit=$(( now - last_commit ))
     MINUTES=$(( seconds_since_last_commit / 60 ))
     HOURS=$(( MINUTES / 60 ))
 
