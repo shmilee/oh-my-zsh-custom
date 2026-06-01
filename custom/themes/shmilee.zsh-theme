@@ -60,8 +60,16 @@ function git_time_since_commit() {
     fi
 }
 
+#pixi_environment_info() {
+#    [[ -n "$PIXI_ENVIRONMENT_NAME" ]] && echo -n "%{$fg_bold[cyan]%}pixi:($PIXI_ENVIRONMENT_NAME)%{$reset_color%}"
+#}
+
+pixi_prompt_info() {
+    [[ -n "$PIXI_PROMPT" && "$PIXI_CHANGE_PS1" == "true" ]] && echo -n "$PIXI_PROMPT"
+}
+
 PROMPT=$'${_cnt}╭─${_op}${_u_at_h}: %{\e[1;37m%}%~${_cp}-${_op}%*${_cp} $(git_prompt_info)
-${_cnt}╰─${_op}%{\e[1;37m%}%B%(!.#.$)${_cp} '
+$(pixi_prompt_info)${_cnt}╰─${_op}%{\e[1;37m%}%B%(!.#.$)${_cp} '
 ZLE_RPROMPT_INDENT=0
 RPROMPT='$(git_time_since_commit)$(git_prompt_status) ${smiley_ret}'
 PS2=$'[%_] ${_cnt}>%{\e[0m%}%b '
