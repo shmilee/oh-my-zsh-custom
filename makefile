@@ -41,6 +41,11 @@ ifeq ($(HOST),ZION)
 	ZSH := $(MYAPP)/share/oh-my-zsh
 endif
 
+ifneq (,$(findstring b16658f3f, $(shell cat /etc/machine-id 2>/dev/null)))
+	LOCATION := hhf-200
+	plugins += hhf-200 sudo command-not-found systemd
+endif
+
 # my computer & archlinux
 ifneq (,$(findstring arch-,$(HOST)))
 	LOCATION := arch
@@ -62,17 +67,17 @@ $(LOCATION):
 	@echo
 	@sed -e 's|##ZSH##|$(ZSH)|' -e 's|##ZSH_CUSTOM##|$(ZSH_CUSTOM)|' \
 		-e 's|##PLUGINS##|$(plugins)|' myzshrc > zshrc.$(LOCATION)
-	@if [[ $(FIX_FPATH) == yes ]]; then \
+	@if [ x"$(FIX_FPATH)" = xyes ]; then \
 		sed -i -e 's|^##FIX_FPATH##|fpath=($(FPATH) $$fpath)|' zshrc.$(LOCATION); \
 	fi
-	@if [[ x"$(LOCATION)" == x"TH-3F" ]]; then \
+	@if [ x"$(LOCATION)" = x"TH-3F" ]; then \
 		sed -i -e 's|^compinit$$|compinit -i|' zshrc.$(LOCATION); \
 	fi
 install: pre
 	@cd custom/; find . -type d -exec install -dvm755 {} $(ZSH_CUSTOM)/{} \;
 	@cd custom/; find . -type f \( -name '*.zsh' -or -name '*.zsh-theme' \) \
 		-exec install -vm644 {} $(ZSH_CUSTOM)/{} \;
-	@if [ -a $(HOME)/.zshrc ]; then \
+	@if [ -f $(HOME)/.zshrc ]; then \
 		mv -v $(HOME)/.zshrc $(HOME)/.zshrc.bk; \
 	fi
 	install -m644 zshrc.$(LOCATION) $(HOME)/.zshrc

@@ -6,6 +6,7 @@ Plugins
 * ifts-zion
 * systemd-more
 * th-1a
+* hhf-200
 
 Theme
 ========
@@ -16,7 +17,5 @@ Theme
 
 Override
 ========
-
-* lib/git.zsh
 
 * myalias.zsh
